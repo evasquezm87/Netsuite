@@ -12,8 +12,12 @@ function(runtime, message) {
        
       }
 
+      /*Evento al cambiar campo
+      *En este caso si el campo es firstname o lastname asigna en el campo personalizado el valor
+      *Adicional si intentan cambiar el campo codigo empleado no permite y envia mensaje
+      */  
       function fieldChanged(Context) {
-
+        //Entra solo si el campo es el firstname o lastname
         if(Context.fieldId === 'firstname' || Context.fieldId === 'lastname')
         {  
             var employee = Context.currentRecord;
@@ -23,7 +27,7 @@ function(runtime, message) {
 
         if(Context.fieldId === 'custentity_san_codigo_empleado')
         {           
-                                   
+            //entra solo si el campo es el del codigo empleado                       
             var employee = Context.currentRecord;
             var nombre = employee.getValue('firstname');
             var apellido = employee.getValue('lastname');
@@ -44,7 +48,10 @@ function(runtime, message) {
             }
         }
     }
-
+    
+    //Función al guardar el registro
+    //Si no tiene valor en fax coloca el telefono
+    //ademas asigna valor al campo codigo empleado
     function saveRecord(Context) {
         var employee = Context.currentRecord;
 
